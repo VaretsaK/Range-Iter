@@ -49,24 +49,20 @@ class RangeIter:
             StopIteration: When the end of the range is reached.
             ValueError: If step is zero.
         """
-        if self.step > 0:
+        if self.step == 0:
+            raise ValueError("arg 3 must not be zero")
+
+        elif self.step > 0:
             if self.current >= self.end:
                 raise StopIteration
-
-            value: int = self.current
-            self.current += self.step
-            return value
 
         elif self.step < 0:
             if self.end >= self.current:
                 raise StopIteration
 
-            value = self.current
-            self.current += self.step
-            return value
-
-        else:
-            raise ValueError("arg 3 must not be zero")
+        value = self.current
+        self.current += self.step
+        return value
 
 
 def main() -> None:
